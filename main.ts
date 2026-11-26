@@ -26,6 +26,11 @@ function validateEntry(line: string): void {
   if (line.trim().length === 0) {
     throw new Error("entry must not be blank");
   }
+  // The judge reads one funny line: any newline would split the entry
+  // into two lines and break the gate's single-text reading.
+  if (line.includes("\n") || line.includes("\r")) {
+    throw new Error("entry must be a single line");
+  }
 }
 
 function resolveOutputDir(): string {
